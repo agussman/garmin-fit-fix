@@ -58,6 +58,31 @@ $ curl 127.0.0.1:8000
 {"hello": "AARON2"}
 ```
 
+# Angular Crap
+
+Create a new Angular 5 project:
+```
+$ ng new fit-convert-ng5
+$ cd fit-convert-ng5/
+```
+
+Create an `Acvity` class:
+ ```
+ $ ng generate class Activity
+ 
+ ```
+ 
+ We populate `activity.ts` with some basic parameters of type `string`:
+ ```typescript
+ export class Activity {
+
+    constructor(
+        public title: string,
+        public eventType: string
+    ) {  }
+}
+```
+
 
 
 
@@ -68,3 +93,4 @@ $ curl 127.0.0.1:8000
  * [python-fitparse](https://pypi.python.org/pypi/fitparse/1.0.0) - library reading the (corrupted) .fit file. Note that nowhere was I able to find a library (python or otherwise) that lets you WRITE .fit files. If you come across one, please let me know!
  * [Routes, Tracks, & Waypoints](http://www.globeriders.com/article_pages/article08_RTW/article08_rtw.shtml) - Some notes on the difference between GPX Waypoints, Tracks, and Routes (full disclosure: I don't completely understand the difference).
  * [Chalice Quickstart](http://chalice.readthedocs.io/en/latest/quickstart.html)
+ * [Angular 5 Forms](https://angular.io/guide/forms)
