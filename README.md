@@ -66,23 +66,27 @@ $ ng new fit-convert-ng5
 $ cd fit-convert-ng5/
 ```
 
-Create an `Acvity` class:
- ```
- $ ng generate class Activity
+Create an `Activity` class:
+```
+$ ng generate class Activity
+
+```
  
- ```
- 
- We populate `activity.ts` with some basic parameters of type `string`:
- ```typescript
- export class Activity {
+We populate `activity.ts` with some basic parameters of type `string`:
+```typescript
+export class Activity {
 
     constructor(
         public title: string,
-        public eventType: string
+        public activityType: string
     ) {  }
 }
 ```
 
+Next create an `ActivityForm`:
+```
+$ ng generate component ActivityForm
+```
 
 
 
