@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Activity } from '../hero';
+import { Activity } from '../activity';
 
 @Component({
   selector: 'app-activity-form',
@@ -16,7 +16,7 @@ export class ActivityFormComponent implements OnInit {
 
   ngOnInit() {
   }
-  
+
   onSubmit() { this.submitted = true; }
 
 }
