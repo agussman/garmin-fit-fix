@@ -12,6 +12,8 @@ export class ActivityFormComponent implements OnInit {
 
   submitted = false;
 
+  // TODO: Missing a 'model =' here
+
   constructor() { }
 
   ngOnInit() {

@@ -1,9 +1,9 @@
 <div class="container">
     <h1>Activity Form</h1>
-    <form>
+    <form #activityForm="ngForm">
       <div class="form-group">
         <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" required>
+        <input type="text" class="form-control" id="title" required [(ngModel)]="model.title" name="title">
       </div>
 
       <div class="form-group">
@@ -14,6 +14,6 @@
       </div>
 
       <button type="submit" class="btn btn-success">Submit</button>
-
+      TODO: remove this: {{model.name}}
     </form>
 </div>
