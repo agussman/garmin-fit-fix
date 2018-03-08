@@ -1,3 +1,4 @@
+{{diagnostic}}
 <div class="container">
     <h1>Activity Form</h1>
     <form #activityForm="ngForm">
@@ -8,12 +9,12 @@
 
       <div class="form-group">
         <label for="activityType">Activity Type</label>
-        <select class="form-control" id="activityType" required>
+        <select class="form-control" id="activityType" required [(ngModel)]="model.activityType" name="activityType">
           <option *ngFor="let aType of activityTypes" [value]="aType">{{aType}}</option>
         </select>
       </div>
 
       <button type="submit" class="btn btn-success">Submit</button>
-      TODO: remove this: {{model.name}}
+      TODO: remove this: {{model.title}}
     </form>
 </div>

@@ -13,6 +13,7 @@ export class ActivityFormComponent implements OnInit {
   submitted = false;
 
   // TODO: Missing a 'model =' here
+  model = new Activity("", "");
 
   constructor() { }
 
@@ -20,5 +21,8 @@ export class ActivityFormComponent implements OnInit {
   }
 
   onSubmit() { this.submitted = true; }
+
+  // TODO: Remove this when we're done
+  get diagnostic() { return JSON.stringify(this.model); }
 
 }
