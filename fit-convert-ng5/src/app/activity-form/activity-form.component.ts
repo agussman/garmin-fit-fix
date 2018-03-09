@@ -20,7 +20,7 @@ export class ActivityFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit() { this.submitted = true; }
+  onSubmit() { this.submitted = true; console.log("You clicked Submit!"); }
 
   // TODO: Remove this when we're done
   get diagnostic() { return JSON.stringify(this.model); }

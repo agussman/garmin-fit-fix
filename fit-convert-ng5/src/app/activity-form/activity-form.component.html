@@ -1,6 +1,6 @@
 <div class="container">
     <h1>Activity Form</h1>
-    <form #activityForm="ngForm">
+    <form (ngSubmit)="onSubmit()" #activityForm="ngForm">
       <div class="form-group">
         <label for="title">Title</label>
         <input type="text" class="form-control" id="title" required [(ngModel)]="model.title" name="title">
@@ -13,7 +13,7 @@
         </select>
       </div>
 
-      <button type="submit" class="btn btn-success">Submit</button>
+      <button type="submit" class="btn btn-success" [disabled]="!activityForm.form.valid">Submit</button>
       TODO: remove this: {{model.title}}
     </form>
 </div>
