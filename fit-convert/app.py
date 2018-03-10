@@ -3,7 +3,7 @@ from chalice import Chalice
 app = Chalice(app_name='fit-convert')
 app.debug = True
 
-@app.route('/')
+@app.route('/', cors=True)
 def index():
     return {'hello': 'AARON2'}
 

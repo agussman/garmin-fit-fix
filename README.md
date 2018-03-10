@@ -58,6 +58,11 @@ $ curl 127.0.0.1:8000
 {"hello": "AARON2"}
 ```
 
+For development purposes, we'll want to add `cors=True` to the API endpoints (this is not something we want in production)
+```
+@app.route('/', cors=True)
+```
+
 # Angular Crap
 
 Create a new Angular 5 project:
@@ -98,3 +103,5 @@ $ ng generate component ActivityForm
  * [Routes, Tracks, & Waypoints](http://www.globeriders.com/article_pages/article08_RTW/article08_rtw.shtml) - Some notes on the difference between GPX Waypoints, Tracks, and Routes (full disclosure: I don't completely understand the difference).
  * [Chalice Quickstart](http://chalice.readthedocs.io/en/latest/quickstart.html)
  * [Angular 5 Forms](https://angular.io/guide/forms)
+ * [Angular 5 Core HTTP API](https://codecraft.tv/courses/angular/http/core-http-api/#_post_with_data) - Exaple of how to actually submit a form to an API
+ * [AWS Serverless Demo App](https://github.com/awslabs/aws-serverless-workshops/tree/master/WebApplication)
