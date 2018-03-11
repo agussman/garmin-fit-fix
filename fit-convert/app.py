@@ -15,6 +15,10 @@ def index():
 def introspect():
     return app.current_request.to_dict()
 
+@app.route('/process', methods=['POST'], cors=True)
+def index():
+    return {'message': 'You called process'}
+
 
 # The view function above will return {"hello": "world"}
 # whenever you make an HTTP GET request to '/'.

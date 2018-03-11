@@ -25,8 +25,9 @@ export class ActivityFormComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     console.log("You clicked Submit!");
-    let url = `${this.apiRoot}/`;
-    this.http.get(url).subscribe(res => console.log(res.text()));
+    let url = `${this.apiRoot}/process`;
+    //this.http.get(url).subscribe(res => console.log(res.text()));
+    this.http.post(url, JSON.stringify(this.model) ).subscribe(res => console.log(res.text()));
     console.log("Done with onSubmit");
   }
 
