@@ -105,3 +105,4 @@ $ ng generate component ActivityForm
  * [Angular 5 Forms](https://angular.io/guide/forms)
  * [Angular 5 Core HTTP API](https://codecraft.tv/courses/angular/http/core-http-api/#_post_with_data) - Exaple of how to actually submit a form to an API
  * [AWS Serverless Demo App](https://github.com/awslabs/aws-serverless-workshops/tree/master/WebApplication)
+ * [Useful help on using HttpClient over deprecated Http service](http://brianflove.com/2017/07/21/migrating-to-http-client/)
