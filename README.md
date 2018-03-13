@@ -93,6 +93,16 @@ Next create an `ActivityForm`:
 $ ng generate component ActivityForm
 ```
 
+<Put stuff in ActivityForm>
+
+Create an `ActivityService`:
+```
+$ ng generate service ActivityService
+  create src/app/activity-service.service.spec.ts (429 bytes)
+  create src/app/activity-service.service.ts (121 bytes)
+```
+
+Note that the `HttpModule` aka `@angular/core` is now deprecated; you should use `HttpClient` from `@angular/common/http` instead. Unfortunately a lot of the documentation still usess the old library and the look similar enough that it's not immediately obvious.
 
 
 
@@ -103,6 +113,7 @@ $ ng generate component ActivityForm
  * [Routes, Tracks, & Waypoints](http://www.globeriders.com/article_pages/article08_RTW/article08_rtw.shtml) - Some notes on the difference between GPX Waypoints, Tracks, and Routes (full disclosure: I don't completely understand the difference).
  * [Chalice Quickstart](http://chalice.readthedocs.io/en/latest/quickstart.html)
  * [Angular 5 Forms](https://angular.io/guide/forms)
- * [Angular 5 Core HTTP API](https://codecraft.tv/courses/angular/http/core-http-api/#_post_with_data) - Exaple of how to actually submit a form to an API
+ * [Angular 5 Core HTTP API](https://codecraft.tv/courses/angular/http/core-http-api/#_post_with_data) - Example of how to actually submit a form to an API
  * [AWS Serverless Demo App](https://github.com/awslabs/aws-serverless-workshops/tree/master/WebApplication)
  * [Useful help on using HttpClient over deprecated Http service](http://brianflove.com/2017/07/21/migrating-to-http-client/)
+ * [Angular 5 Services](http://devarea.com/angular-5-services/) - Examples of creating a Service around `HttpClient`
