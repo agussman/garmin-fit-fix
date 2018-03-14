@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, Response, RequestOptions, Headers } from '@angular/http';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+
 import { Activity } from '../activity';
 
 @Component({
@@ -16,9 +15,8 @@ export class ActivityFormComponent implements OnInit {
 
   // TODO: Missing a 'model =' here
   model = new Activity("", "");
-  apiRoot: string = "http://127.0.0.1:8000";
 
-  constructor(private http: Http) { }
+  constructor(private _as:ActivityServiceService) { }
 
   ngOnInit() {
   }
@@ -26,9 +24,9 @@ export class ActivityFormComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     console.log("You clicked Submit!");
-    let url = `${this.apiRoot}/process`;
+    //let url = `${this.apiRoot}/process`;
     //this.http.get(url).subscribe(res => console.log(res.text()));
-    this.http.post(url, JSON.stringify(this.model), {headers: new HttpHeaders({'Content-Type': 'application/json'})} ).subscribe(res => console.log(res.text()));
+    //this.http.post(url, JSON.stringify(this.model), {headers: new HttpHeaders({'Content-Type': 'application/json'})} ).subscribe(res => console.log(res.text()));
     console.log("Done with onSubmit");
   }
 

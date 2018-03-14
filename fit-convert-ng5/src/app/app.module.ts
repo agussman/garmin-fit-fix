@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
-
+import { HttpClientModule } from "@angular/common/http";;
 import { AppComponent } from './app.component';
 import { ActivityFormComponent } from './activity-form/activity-form.component';
-
+import { ActivityServiceService } from './activity-service.service';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { ActivityFormComponent } from './activity-form/activity-form.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ActivityServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
