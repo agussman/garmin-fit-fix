@@ -26,7 +26,7 @@ export class ActivityFormComponent implements OnInit {
     this.submitted = true;
     console.log("You clicked Submit!");
     // TODO: This is an observable, subscribe to it???
-    this._as.processActivity();
+    this._as.processActivity().subscribe(res => console.log(res['hello']));
     //let url = `${this.apiRoot}/process`;
     //this.http.get(url).subscribe(res => console.log(res.text()));
     //this.http.post(url, JSON.stringify(this.model), {headers: new HttpHeaders({'Content-Type': 'application/json'})} ).subscribe(res => console.log(res.text()));

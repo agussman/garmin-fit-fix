@@ -9,10 +9,10 @@ export class ActivityServiceService {
 
   constructor(private _htc:HttpClient) { }
 
-  processActivity():Observable<any> {
+  processActivity() {
     console.log("You used a service!");
     let url = `${this.apiRoot}/`;
-    return this._htc.get<any>(url)
+    return this._htc.get(url);
   }
 
 }
