@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
+import { Activity } from './activity';
 
 @Injectable()
 export class ActivityServiceService {
@@ -9,12 +10,10 @@ export class ActivityServiceService {
 
   constructor(private _htc:HttpClient) { }
 
-  processActivity() {
+  processActivity(myActivity: Activity) {
     console.log("You used a service!");
-    //let url = `${this.apiRoot}/`;
-    //return this._htc.get(url);
     let url = `${this.apiRoot}/process`;
-    return this._htc.post(url, { 'a': 'value', 'b':'value');
+    return this._htc.post(url, myActivity);
   }
 
 }

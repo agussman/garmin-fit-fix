@@ -1,4 +1,5 @@
 from chalice import Chalice
+from pprint import pprint
 
 app = Chalice(app_name='fit-convert')
 app.debug = True
@@ -17,6 +18,8 @@ def introspect():
 
 @app.route('/process', methods=['POST'], cors=True)
 def index():
+    req = app.current_request.json_body
+    pprint(req)
     return {'message': 'You called process'}
 
 
