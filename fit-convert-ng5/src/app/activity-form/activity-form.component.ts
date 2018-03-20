@@ -14,7 +14,6 @@ export class ActivityFormComponent implements OnInit {
 
   submitted = false;
 
-  // TODO: Missing a 'model =' here
   model = new Activity("Default Activity", "Running");
 
   constructor(private _as:ActivityServiceService) { }

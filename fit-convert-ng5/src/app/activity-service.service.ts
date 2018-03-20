@@ -16,4 +16,22 @@ export class ActivityServiceService {
     return this._htc.post(url, myActivity);
   }
 
+  fileUpload(fileItem:File, extraData?:object):any{
+      let apiCreateEndpoint = `${this.apiRoot}/process`
+      const formData: FormData = new FormData();
+
+      formData.append('fileItem', fileItem, fileItem.name);
+      if (extraData) {
+        for(let key in extraData){
+            // iterate and set other form data
+          formData.append(key, extraData[key])
+        }
+      }
+
+      const req = new HttpRequest('POST', apiCreateEndpoint, formData, {
+        reportProgress: true // for progress data
+      });
+      return this.http.request(req)
+  }
+
 }
