@@ -16,4 +16,15 @@
       <button type="submit" class="btn btn-success" [disabled]="!activityForm.form.valid">Submit</button>
       TODO: remove this: {{model.title}}
     </form>
+
+
+  <form [formGroup]='statusFormGroup' #statusNgForm='ngForm' (submit)='handleSubmit($event, statusNgForm, statusFormGroup)'>
+
+  </form>
+
+
+
+
+
+
 </div>

@@ -18,7 +18,8 @@ export class ActivityFormComponent implements OnInit {
 
   model = new Activity("Default Activity", "Running");
 
-  statusCreateForm: FormGroup;
+  //statusCreateForm: FormGroup;
+  statusFormGroup: FormGroup;
   fileDescription: FormControl;
   fileToUpload: File  = null;
   uploadProgress:number = 0;
@@ -40,7 +41,8 @@ export class ActivityFormComponent implements OnInit {
       Validators.maxLength(280)
     ]);
 
-    this.statusCreateForm = new FormGroup({
+    //this.statusCreateForm = new FormGroup({
+    this.statusFormGroup = new FormGroup({
         'description': this.fileDescription,
     });
   }
@@ -56,7 +58,7 @@ export class ActivityFormComponent implements OnInit {
 
           let submittedData = statusFormGroup.value
 
-          this.fileUploadSub = this.fileUploadService.fileUpload(
+          this.fileUploadSub = this._as.fileUpload(
                 this.fileToUpload,
                 submittedData).subscribe(
                     event=>this.handleProgress(event),
