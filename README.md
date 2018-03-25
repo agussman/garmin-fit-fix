@@ -117,4 +117,4 @@ Note that the `HttpModule` aka `@angular/core` is now deprecated; you should use
  * [AWS Serverless Demo App](https://github.com/awslabs/aws-serverless-workshops/tree/master/WebApplication)
  * [Useful help on using HttpClient over deprecated Http service](http://brianflove.com/2017/07/21/migrating-to-http-client/)
  * [Angular 5 Services](http://devarea.com/angular-5-services/) - Examples of creating a Service around `HttpClient`
- * [File Upload with Angular](https://www.codingforentrepreneurs.com/blog/file-upload-with-angular/)
+ * [File Upload with Angular](https://www.codingforentrepreneurs.com/blog/file-upload-with-angular/) - Good architectural overview of how to set this up, but the code was _riddled_ with errors that were difficult to debug as a neophyte

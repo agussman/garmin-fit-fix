@@ -39,12 +39,12 @@ export class ActivityFormComponent implements OnInit {
       Validators.required,
       Validators.minLength(4),
       Validators.maxLength(280)
-    ]);
+    ])
 
     //this.statusCreateForm = new FormGroup({
     this.statusFormGroup = new FormGroup({
-        'description': this.fileDescription,
-    });
+        'fileDescription': this.fileDescription,
+    })
   }
 
 
