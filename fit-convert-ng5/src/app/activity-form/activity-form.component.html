@@ -28,11 +28,25 @@
 
   <textarea id='fileDescription' name='fileDescription' formControlName='fileDescription'></textarea>
 
+      <div *ngIf='fileDescription.invalid && (fileDescription.dirty || fileDescription.touched)'>
+        <div *ngIf='fileDescription.errors.required'>
+            Content is required.
+        </div>
+        <div *ngIf='fileDescription.errors.maxlength'>
+            Max length is 280
+        </div>
+        <div *ngIf='fileDescription.errors.minlength'>
+            Min length is 4
+        </div>
+    </div>
 
-
-
+    <button type='submit' class='btn btn-default' [disabled]='statusFormGroup.invalid'>Submit</button>
+    <button type='button' class='btn btn-default' (click)='statusNgForm.resetForm({})'>Reset</button>
 
 
   </form>
+
+  Progress:
+<div style='width:%;background-color:#007cae;'><span *ngIf='uploadProgress > 25'>%</span></div>
 
 </div>
