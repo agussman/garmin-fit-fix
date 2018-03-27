@@ -18,7 +18,9 @@ def introspect():
 
 @app.route('/process', methods=['POST'], cors=True, content_types=['multipart/form-data'])
 def index():
-    req = app.current_request.json_body
+    #req = app.current_request.json_body
+    #req = app.current_request.raw_body
+    req = app.current_request.to_dict()
     pprint(req)
     return {'message': 'You called process'}
 
