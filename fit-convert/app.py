@@ -1,4 +1,6 @@
 from chalice import Chalice
+from requests_toolbelt.multipart import decoder
+
 from pprint import pprint
 
 app = Chalice(app_name='fit-convert')
@@ -19,9 +21,16 @@ def introspect():
 @app.route('/process', methods=['POST'], cors=True, content_types=['multipart/form-data'])
 def index():
     #req = app.current_request.json_body
-    #req = app.current_request.raw_body
-    req = app.current_request.to_dict()
-    pprint(req)
+    req = app.current_request.raw_body
+    #req = app.current_request.to_dict()
+    #pprint(req)
+
+    multipart_data = decoder.MultipartDecoder.from_response(app.current_request)
+    for part in multipart_data.parts:
+        print("!!!")
+        print(part.content)  # Alternatively, part.text if you want unicode
+        print(part.headers)
+
     return {'message': 'You called process'}
 
 
