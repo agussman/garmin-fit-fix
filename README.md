@@ -104,6 +104,8 @@ $ ng generate service ActivityService
 
 Note that the `HttpModule` aka `@angular/core` is now deprecated; you should use `HttpClient` from `@angular/common/http` instead. Unfortunately a lot of the documentation still usess the old library and the look similar enough that it's not immediately obvious.
 
+Updating the chalice app.py to parse `multipart/form-data` was quite a doozy. It seems like it should be really straightforward
+a thing that a library just exists for, but it wasn't!
 
 
 # References
