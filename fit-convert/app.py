@@ -20,12 +20,12 @@ def introspect():
 
 @app.route('/process', methods=['POST'], cors=True, content_types=['multipart/form-data'])
 def index():
-    #req = app.current_request.json_body
-    req = app.current_request.raw_body
-    #req = app.current_request.to_dict()
-    #pprint(req)
 
-    multipart_data = decoder.MultipartDecoder.from_response(app.current_request)
+    # Get the content-type
+    content_type = app.current_request.to_dict()['headers']['content-type']
+    content = app.current_request.raw_body
+
+    multipart_data = decoder.MultipartDecoder(content, content_type)
     for part in multipart_data.parts:
         print("!!!")
         print(part.content)  # Alternatively, part.text if you want unicode
