@@ -28,8 +28,18 @@ def index():
     multipart_data = decoder.MultipartDecoder(content, content_type)
     for part in multipart_data.parts:
         print("!!!")
-        print(part.content)  # Alternatively, part.text if you want unicode
+        #print(part.content)  # Alternatively, part.text if you want unicode
         print(part.headers)
+        #print(part.headers[b'Content-Disposition'])
+        #print(part.encoding)
+        #print(part.headers[b'Content-Disposition'].decode(part.encoding))
+        #pprint(part)
+        content_disposition = part.headers[b'Content-Disposition'].decode(part.encoding)
+        cd = [x.strip() for x in content_disposition.split(';')]
+        for x in cd:
+            print(x)
+
+
 
     return {'message': 'You called process'}
 
