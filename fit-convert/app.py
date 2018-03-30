@@ -1,5 +1,9 @@
 from chalice import Chalice
+
+import re
+
 from requests_toolbelt.multipart import decoder
+
 
 from pprint import pprint
 
@@ -21,6 +25,9 @@ def introspect():
 @app.route('/process', methods=['POST'], cors=True, content_types=['multipart/form-data'])
 def index():
 
+    # Dict to populate with passed-in form data
+    data = {}
+
     # Get the content-type
     content_type = app.current_request.to_dict()['headers']['content-type']
     content = app.current_request.raw_body
@@ -36,8 +43,22 @@ def index():
         #pprint(part)
         content_disposition = part.headers[b'Content-Disposition'].decode(part.encoding)
         cd = [x.strip() for x in content_disposition.split(';')]
-        for x in cd:
-            print(x)
+        print(cd[1])
+        m = re.match('name="(.*)"', cd[1])
+        if m is None:
+            #TODO: Throw a proper error!
+            print("Unable to extract name= from header Content-Disposition")
+            exit()
+        name = m.group(1)
+
+        if name == "fileItem":
+            print("DO STUFF WITH FILE")
+            data[name] = "<PLACEHOLDER>"
+        else:
+            data[name] = part.content
+
+
+    pprint(data)
 
 
 
