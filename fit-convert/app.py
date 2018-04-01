@@ -1,14 +1,30 @@
 from chalice import Chalice
 
 import re
+from datetime import datetime
 
 from requests_toolbelt.multipart import decoder
-
+from fitparse import FitFile
+import gpxpy
+import gpxpy.gpx
 
 from pprint import pprint
 
 app = Chalice(app_name='fit-convert')
 app.debug = True
+
+def semicircles_to_degrees(semicircle):
+    # 2147483648 = 2^31
+    return float(semicircle) * ( 180.0 / 2147483648.0 )
+
+def string_to_datetime(txt):
+    # 2018-03-01 02:43:52
+    return datetime.strptime(txt, '%Y-%m-%d %H:%M:%S')
+
+def datetime_to_string(dt):
+    # 2018-03-01T05:04:39.000Z
+    return dt.isoformat()+".000Z"
+
 
 @app.route('/', cors=True)
 def index():
@@ -53,12 +69,69 @@ def index():
 
         if name == "fileItem":
             print("DO STUFF WITH FILE")
-            data[name] = "<PLACEHOLDER>"
+            fitfile = FitFile(part.content)
+            data[name] = fitfile
         else:
             data[name] = part.content
 
 
     pprint(data)
+
+    gpx = gpxpy.gpx.GPX()
+
+    # Create first track in our GPX:
+    gpx_track = gpxpy.gpx.GPXTrack()
+    gpx.tracks.append(gpx_track)
+
+    # Create first segment in our GPX track:
+    gpx_segment = gpxpy.gpx.GPXTrackSegment()
+    gpx_track.segments.append(gpx_segment)
+
+    points = []
+
+    try:
+        # Get all data messages that are of type record
+        for record in fitfile.get_messages('record'):
+            datum = {}
+            # Go through all the data entries in this record
+            for record_data in record:
+                # Print the records name and value (and units if it has any)
+                if record_data.units:
+                    print(" * %s: %s %s" % (
+                        record_data.name, record_data.value, record_data.units,
+                    ))
+                    datum[record_data.name] = record_data.value
+                else:
+                    print(" * %s: %s" % (record_data.name, record_data.value))
+                    datum[record_data.name] = record_data.value
+            print
+            # Create points:
+            #gpx_segment.points.append(gpxpy.gpx.GPXTrackPoint(2.1234, 5.1234, elevation=1234))
+            #gpx_segment.points.append(gpxpy.gpx.GPXTrackPoint(
+            gpx_segment.points.append(gpxpy.gpx.GPXWaypoint(
+                    elevation=datum['altitude'],
+                    time = datum['timestamp'],
+                    latitude = semicircles_to_degrees(datum['position_lat']),
+                    longitude = semicircles_to_degrees(datum['position_long']),
+                ))
+            print("TS: {}".format(datum['timestamp']))
+            point = {
+                'elevation': datum['altitude'],
+                #'time': string_to_datetime(datum['timestamp']),
+                'time': string_to_datetime("{}".format(datum['timestamp'])),
+                'latitude': semicircles_to_degrees(datum['position_lat']),
+                'longitude': semicircles_to_degrees(datum['position_long']),
+                'heart_rate': datum['heart_rate'],
+                'cadence': datum['cadence']
+            }
+            points.append(point)
+
+
+    except:
+        #with open(gpxfile, 'w') as f:
+        #    f.write(gpx.to_xml())
+        print('Created GPX:')
+
 
 
 
