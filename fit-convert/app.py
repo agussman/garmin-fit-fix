@@ -5,8 +5,6 @@ from datetime import datetime
 
 from requests_toolbelt.multipart import decoder
 from fitparse import FitFile
-import gpxpy
-import gpxpy.gpx
 
 from pprint import pprint
 
@@ -75,17 +73,7 @@ def index():
             data[name] = part.content
 
 
-    pprint(data)
-
-    gpx = gpxpy.gpx.GPX()
-
-    # Create first track in our GPX:
-    gpx_track = gpxpy.gpx.GPXTrack()
-    gpx.tracks.append(gpx_track)
-
-    # Create first segment in our GPX track:
-    gpx_segment = gpxpy.gpx.GPXTrackSegment()
-    gpx_track.segments.append(gpx_segment)
+    #pprint(data)
 
     points = []
 
@@ -97,23 +85,13 @@ def index():
             for record_data in record:
                 # Print the records name and value (and units if it has any)
                 if record_data.units:
-                    print(" * %s: %s %s" % (
-                        record_data.name, record_data.value, record_data.units,
-                    ))
+                    #print(" * %s: %s %s" % (
+                    #    record_data.name, record_data.value, record_data.units,
+                    #))
                     datum[record_data.name] = record_data.value
                 else:
-                    print(" * %s: %s" % (record_data.name, record_data.value))
+                    #print(" * %s: %s" % (record_data.name, record_data.value))
                     datum[record_data.name] = record_data.value
-            print
-            # Create points:
-            #gpx_segment.points.append(gpxpy.gpx.GPXTrackPoint(2.1234, 5.1234, elevation=1234))
-            #gpx_segment.points.append(gpxpy.gpx.GPXTrackPoint(
-            gpx_segment.points.append(gpxpy.gpx.GPXWaypoint(
-                    elevation=datum['altitude'],
-                    time = datum['timestamp'],
-                    latitude = semicircles_to_degrees(datum['position_lat']),
-                    longitude = semicircles_to_degrees(datum['position_long']),
-                ))
             print("TS: {}".format(datum['timestamp']))
             point = {
                 'elevation': datum['altitude'],
@@ -132,10 +110,48 @@ def index():
         #    f.write(gpx.to_xml())
         print('Created GPX:')
 
+    txt = '''<?xml version="1.0" encoding="UTF-8"?>
+    <gpx creator="Garmin Connect" version="1.1"
+      xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/11.xsd"
+      xmlns:ns3="http://www.garmin.com/xmlschemas/TrackPointExtension/v1"
+      xmlns="http://www.topografix.com/GPX/1/1"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+      <metadata>
+        <link href="connect.garmin.com">
+          <text>Garmin Connect</text>
+        </link>
+        <time>2018-03-01T02:34:15.000Z</time>
+      </metadata>
+      <trk>
+        <name>Fairfax County Running</name>
+        <type>running</type>
+        <trkseg>
+    '''
+
+    for point in points:
+        trkpt = """
+          <trkpt lat="{}" lon="{}">
+            <ele>{}</ele>
+            <time>{}</time>
+            <extensions>
+              <ns3:TrackPointExtension>
+                <ns3:hr>{}</ns3:hr>
+                <ns3:cad>{}</ns3:cad>
+              </ns3:TrackPointExtension>
+            </extensions>
+          </trkpt>
+        """.format(point["latitude"], point["longitude"], point["elevation"], datetime_to_string(point["time"]), point["heart_rate"], point["cadence"])
+        txt += trkpt
+
+    txt += """
+        </trkseg>
+      </trk>
+    </gpx>
+    """
 
 
 
-    return {'message': 'You called process'}
+    return {'message': txt}
 
 
 # The view function above will return {"hello": "world"}
