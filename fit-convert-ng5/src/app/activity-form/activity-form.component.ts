@@ -82,6 +82,10 @@ export class ActivityFormComponent implements OnInit {
         console.log(this.myFileInput.nativeElement.files);
     }
 
+    handleDownload() {
+        console.log("you are doing the file download thing");
+    }
+
   onSubmit() {
     this.submitted = true;
     console.log("You clicked Submit!");
