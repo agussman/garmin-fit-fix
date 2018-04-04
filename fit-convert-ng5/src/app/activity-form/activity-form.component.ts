@@ -27,6 +27,7 @@ export class ActivityFormComponent implements OnInit {
   uploadingProgressing:boolean = false;
   fileUploadSub: any;
   serverResponse: any;
+  //fileBlob = new Blob([data], { type: 'text/xml' })
 
   @ViewChild('myInput')
   myFileInput: any;
@@ -84,17 +85,27 @@ export class ActivityFormComponent implements OnInit {
 
     handleDownload() {
         console.log("you are doing the file download thing");
+
     }
 
   onSubmit() {
     this.submitted = true;
     console.log("You clicked Submit!");
     // TODO: This is an observable, subscribe to it???
-    this._as.processActivity(this.model).subscribe(res => console.log(res));
+    this._as.processActivity(this.model).subscribe(res => {
+      //console.log(res);
+      console.log("hi");
+      //this.handleResponse(res);
+    });
     //let url = `${this.apiRoot}/process`;
     //this.http.get(url).subscribe(res => console.log(res.text()));
     //this.http.post(url, JSON.stringify(this.model), {headers: new HttpHeaders({'Content-Type': 'application/json'})} ).subscribe(res => console.log(res.text()));
     console.log("Done with onSubmit");
+  }
+
+  handleResponse(res) {
+    //console.log(res);
+    console.log("Now do file stuff");
   }
 
   // TODO: Remove this when we're done
