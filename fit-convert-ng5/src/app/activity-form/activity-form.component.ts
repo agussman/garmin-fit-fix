@@ -50,7 +50,7 @@ export class ActivityFormComponent implements OnInit {
 
 
   handleProgress(event) {
-    console.log("Empty handleProgress for now");
+    //console.log("Empty handleProgress for now");
   }
 
   handleSubmit(event:any, statusNgForm:NgForm, statusFormGroup:FormGroup){
@@ -92,11 +92,12 @@ export class ActivityFormComponent implements OnInit {
     this.submitted = true;
     console.log("You clicked Submit!");
     // TODO: This is an observable, subscribe to it???
-    this._as.processActivity(this.model).subscribe(res => {
+    this._as.processActivity(this.model).subscribe(res => console.log(res));
+    //this._as.processActivity(this.model).subscribe(res => {
       //console.log(res);
-      console.log("hi");
+      //console.log("hi");
       //this.handleResponse(res);
-    });
+    //});
     //let url = `${this.apiRoot}/process`;
     //this.http.get(url).subscribe(res => console.log(res.text()));
     //this.http.post(url, JSON.stringify(this.model), {headers: new HttpHeaders({'Content-Type': 'application/json'})} ).subscribe(res => console.log(res.text()));
