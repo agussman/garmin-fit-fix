@@ -57,7 +57,7 @@ export class ActivityFormComponent implements OnInit {
       event.preventDefault()
       if (statusNgForm.submitted){
 
-          let submittedData = statusFormGroup.value
+          let submittedData = statusFormGroup.value;
 
           this.fileUploadSub = this._as.fileUpload(
                 this.fileToUpload,
@@ -67,7 +67,8 @@ export class ActivityFormComponent implements OnInit {
                         console.log("Server error")
                     });
 
-          statusNgForm.resetForm({})
+          statusNgForm.resetForm({});
+          console.log("Actually Done with handleSubmit");
       }
   }
 
