@@ -50,7 +50,25 @@ export class ActivityFormComponent implements OnInit {
 
 
   handleProgress(event) {
-    //console.log("Empty handleProgress for now");
+        if (event.type === HttpEventType.DownloadProgress) {
+        //this.uploadingProgressing =true
+        //this.uploadProgress = Math.round(100 * event.loaded / event.total)
+        console.log("download progress");
+      }
+
+      if (event.type === HttpEventType.UploadProgress) {
+        //this.uploadingProgressing =true
+        //this.uploadProgress = Math.round(100 * event.loaded / event.total)
+        console.log("upload?");
+      }
+
+      if (event.type === HttpEventType.Response) {
+        // console.log(event.body);
+        this.uploadComplete = true
+        this.serverResponse = event.body
+        console.log("response!");
+        
+      }
   }
 
   handleSubmit(event:any, statusNgForm:NgForm, statusFormGroup:FormGroup){
