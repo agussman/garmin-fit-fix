@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators, NgForm } from '@angular/forms';
 import { HttpClient, HttpHeaders, HttpEventType, HttpRequest, HttpErrorResponse, HttpEvent } from '@angular/common/http';
 
+import { saveAs } from 'file-saver/FileSaver';
+
 import { Activity } from '../activity';
 import { ActivityServiceService } from '../activity-service.service';
 
@@ -64,10 +66,12 @@ export class ActivityFormComponent implements OnInit {
 
       if (event.type === HttpEventType.Response) {
         // console.log(event.body);
-        this.uploadComplete = true
-        this.serverResponse = event.body
+        this.uploadComplete = true;
+        this.serverResponse = event.body['message'];
         console.log("response!");
-        
+        console.log(event.body['message']);
+        console.log("again?");
+        console.log(this.serverResponse);
       }
   }
 
@@ -104,7 +108,9 @@ export class ActivityFormComponent implements OnInit {
 
     handleDownload() {
         console.log("you are doing the file download thing");
-
+        const fileBlob = new Blob([this.serverResponse], { type: 'text/xml' });
+        saveAs(fileBlob, "download.xml");
+        console.log("guess we're done here?");
     }
 
   onSubmit() {

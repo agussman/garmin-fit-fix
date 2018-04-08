@@ -71,6 +71,11 @@ $ ng new fit-convert-ng5
 $ cd fit-convert-ng5/
 ```
 
+We'll also need the [FileSaver.js](https://github.com/eligrey/FileSaver.js/):
+```
+$ npm install --save file-saver
+```
+
 Create an `Activity` class:
 ```
 $ ng generate class Activity
@@ -121,3 +126,5 @@ a thing that a library just exists for, but it wasn't!
  * [Angular 5 Services](http://devarea.com/angular-5-services/) - Examples of creating a Service around `HttpClient`
  * [File Upload with Angular](https://www.codingforentrepreneurs.com/blog/file-upload-with-angular/) - Good architectural overview of how to set this up, but the code was _riddled_ with errors that were difficult to debug as a neophyte
  * [Parsing multipart/form-data with Chalice](https://stackoverflow.com/questions/45136349/parsing-raw-body-from-aws-chalice-multipart-form-data-http-request)
+ * [Simple FileSaver.js example](https://shekhargulati.com/2017/07/16/implementing-file-save-functionality-with-angular-4/)
+ * [More in-depth use of FileSaver.js with Angular](http://amilspage.com/angular4-file-download/)
