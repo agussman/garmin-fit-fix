@@ -28,7 +28,7 @@ export class ActivityFormComponent implements OnInit {
   uploadComplete:boolean = false;
   uploadingProgressing:boolean = false;
   fileUploadSub: any;
-  serverResponse: any;
+  serverResponse: any = null;
   //fileBlob = new Blob([data], { type: 'text/xml' })
 
   @ViewChild('myInput')
