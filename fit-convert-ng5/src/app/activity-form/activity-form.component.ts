@@ -30,6 +30,7 @@ export class ActivityFormComponent implements OnInit {
   fileUploadSub: any;
   serverResponse: any = null;
   //fileBlob = new Blob([data], { type: 'text/xml' })
+  downloadAvailable:boolean = false;
 
   @ViewChild('myInput')
   myFileInput: any;
