@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";;
 import { AppComponent } from './app.component';
+
+import { FileDropModule } from 'ngx-file-drop';
+
 import { ActivityFormComponent } from './activity-form/activity-form.component';
 import { ActivityServiceService } from './activity-service.service';
 
@@ -15,7 +18,8 @@ import { ActivityServiceService } from './activity-service.service';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FileDropModule
   ],
   providers: [ActivityServiceService],
   bootstrap: [AppComponent]

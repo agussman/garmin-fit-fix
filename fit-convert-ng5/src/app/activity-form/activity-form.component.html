@@ -21,6 +21,12 @@
   <form [formGroup]='statusFormGroup' #statusNgForm="ngForm" (submit)='handleSubmit($event, statusNgForm, statusFormGroup)'>
     <div class="form-group">
         <label for="file">Choose .FIT File</label>
+        <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)"
+        (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+        <span>optional content (don't set headertext then)</span>
+        </file-drop>
+
+
             <input #myInput type="file"
                    id="file"
                    (change)="handleFileInput($event.target.files)">

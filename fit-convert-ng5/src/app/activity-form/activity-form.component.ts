@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators, NgForm } from '@angular/forms';
 import { HttpClient, HttpHeaders, HttpEventType, HttpRequest, HttpErrorResponse, HttpEvent } from '@angular/common/http';
 
 import { saveAs } from 'file-saver/FileSaver';
+import { UploadEvent, UploadFile } from 'ngx-file-drop';
 
 import { Activity } from '../activity';
 import { ActivityServiceService } from '../activity-service.service';
