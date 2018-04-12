@@ -91,6 +91,7 @@ export class ActivityFormComponent implements OnInit {
                         console.log("Server error")
                     });
 
+          this.resetAllInputs();
           statusNgForm.resetForm({});
           console.log("Actually Done with handleSubmit");
       }
@@ -102,7 +103,7 @@ export class ActivityFormComponent implements OnInit {
         this.fileToUpload = fileItem
     }
 
-    resetFileInput() {
+    resetAllInputs() {
         console.log(this.myFileInput.nativeElement.files);
         this.myFileInput.nativeElement.value = "";
         console.log(this.myFileInput.nativeElement.files);
