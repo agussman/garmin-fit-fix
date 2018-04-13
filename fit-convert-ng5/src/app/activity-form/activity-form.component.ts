@@ -24,6 +24,7 @@ export class ActivityFormComponent implements OnInit {
   //statusCreateForm: FormGroup;
   statusFormGroup: FormGroup;
   fileDescription: FormControl;
+  downloadAvailable: FormControl;
   fileToUpload: File  = null;
   uploadProgress:number = 0;
   uploadComplete:boolean = false;
@@ -31,7 +32,7 @@ export class ActivityFormComponent implements OnInit {
   fileUploadSub: any;
   serverResponse: any = null;
   //fileBlob = new Blob([data], { type: 'text/xml' })
-  downloadAvailable:boolean = false;
+
 
   @ViewChild('myInput')
   myFileInput: any;
@@ -46,9 +47,12 @@ export class ActivityFormComponent implements OnInit {
       Validators.maxLength(280)
     ])
 
+    this.downloadAvailable = new FormControl({value: '', disabled: true})
+
     //this.statusCreateForm = new FormGroup({
     this.statusFormGroup = new FormGroup({
         'fileDescription': this.fileDescription,
+        'downloadAvailable': this.downloadAvailable
     })
   }
 

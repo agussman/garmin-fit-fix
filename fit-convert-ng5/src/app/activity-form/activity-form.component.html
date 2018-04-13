@@ -50,7 +50,7 @@
 
     <button type='submit' class='btn btn-default' [disabled]='statusFormGroup.invalid'>Submit</button>
     <button type='button' class='btn btn-default' (click)='resetAllInputs()'>Reset</button>
-    <button type='button' class='btn btn-default' [disabled]='downloadAvailable' (click)='handleDownload()'>Download</button>
+    <button type='button' class='btn btn-default' id='downloadAvailable' name='downloadAvailable' formControlName='downloadAvailable' (click)='handleDownload()'>Download</button>
 
 
   </form>
