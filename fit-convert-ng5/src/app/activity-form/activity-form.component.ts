@@ -47,12 +47,9 @@ export class ActivityFormComponent implements OnInit {
       Validators.maxLength(280)
     ])
 
-    this.downloadAvailable = new FormControl({value: '', disabled: true})
-
     //this.statusCreateForm = new FormGroup({
     this.statusFormGroup = new FormGroup({
         'fileDescription': this.fileDescription,
-        'downloadAvailable': this.downloadAvailable
     })
   }
 
