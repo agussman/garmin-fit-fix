@@ -53,7 +53,6 @@ export class ActivityFormComponent implements OnInit {
     })
   }
 
-
   handleProgress(event) {
         if (event.type === HttpEventType.DownloadProgress) {
         //this.uploadingProgressing =true

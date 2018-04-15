@@ -51,7 +51,7 @@
     <button type='submit' class='btn btn-default' [disabled]='statusFormGroup.invalid'>Submit</button>
     <button type='button' class='btn btn-default' (click)='resetAllInputs()'>Reset</button>
   </form>
-     <button type='button' class='btn btn-default' [disabled]='uploadComplete' (click)='handleDownload()'>Download</button>
+     <button type='button' class='btn btn-default' [disabled]='!uploadComplete' (click)='handleDownload()'>Download</button>
 
   Progress:
 <div style='width:%;background-color:#007cae;'><span *ngIf='uploadProgress > 25'>%</span></div>
