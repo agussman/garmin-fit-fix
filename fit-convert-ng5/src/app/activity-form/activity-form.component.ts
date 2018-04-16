@@ -107,6 +107,7 @@ export class ActivityFormComponent implements OnInit {
         console.log(this.myFileInput.nativeElement.files);
         this.myFileInput.nativeElement.value = "";
         console.log(this.myFileInput.nativeElement.files);
+        statusNgForm.resetForm({});
     }
 
     handleDownload() {
