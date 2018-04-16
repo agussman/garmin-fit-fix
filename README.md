@@ -112,6 +112,19 @@ Note that the `HttpModule` aka `@angular/core` is now deprecated; you should use
 Updating the chalice app.py to parse `multipart/form-data` was quite a doozy. It seems like it should be really straightforward
 a thing that a library just exists for, but it wasn't!
 
+# Testing Locally
+
+Run the backend with:
+```
+(fit-convert) fit-convert $ chalice local
+```
+
+Run the frontend with:
+```
+fit-convert-ng5 $ ng serve
+```
+
+Check at http://localhost:4200/
 
 # References
 
