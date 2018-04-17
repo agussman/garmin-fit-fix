@@ -19,6 +19,11 @@ $ pip3 install --upgrade virtualenvwrapper
 
 We'll mostly be following the steps in the [Chalice Quickstart](http://chalice.readthedocs.io/en/latest/quickstart.html), only we'll be using `virtualenvwrapper` because we are not plebes. 
 
+Make sure you have Node.js and `npm` installed:
+```
+$ brew install npm
+```
+
 
 # Chalice Setup
 
@@ -64,6 +69,11 @@ For development purposes, we'll want to add `cors=True` to the API endpoints (th
 ```
 
 # Angular Crap
+
+Install Angular 5:
+```
+$ npm install @angular/cli -g
+```
 
 Create a new Angular 5 project:
 ```
