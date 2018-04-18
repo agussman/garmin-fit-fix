@@ -1,5 +1,5 @@
 <div class="container">
-    <h1>Activity Form</h1>
+    <h1>Fit Fixer</h1>
     <form (ngSubmit)="onSubmit()" #activityForm="ngForm">
       <div class="form-group">
         <label for="title">Title</label>
@@ -28,8 +28,6 @@
     <div class="form-group">
         <label for="fileDescription">Activity Title</label>
         <input type="text" class="form-control" id='fileDescription' required name='fileDescription' formControlName='fileDescription'>
-
-
           <div *ngIf='fileDescription.invalid && (fileDescription.dirty || fileDescription.touched)'>
             <div *ngIf='fileDescription.errors.required'>
                 Content is required.
@@ -47,6 +45,8 @@
     <button type='button' class='btn btn-default' (click)='resetAllInputs()'>Reset</button>
     <button type='button' class='btn btn-default' [disabled]='!uploadComplete' (click)='handleDownload()'>Download</button>
   </form>
+
+
 
 
   Progress:

@@ -33,6 +33,11 @@ export class ActivityFormComponent implements OnInit {
   serverResponse: any = null;
   //fileBlob = new Blob([data], { type: 'text/xml' })
 
+  my_menu = {
+    'main1': ['sub1', 'sub2'],
+    'main2': ['sub1', 'sub2', 'sub3'],
+  };
+
 
   @ViewChild('myInput')
   myFileInput: any;
@@ -107,7 +112,7 @@ export class ActivityFormComponent implements OnInit {
         console.log(this.myFileInput.nativeElement.files);
         this.myFileInput.nativeElement.value = "";
         console.log(this.myFileInput.nativeElement.files);
-        statusNgForm.resetForm({});
+        //statusNgForm.resetForm({});
     }
 
     handleDownload() {
