@@ -20,7 +20,9 @@ import { ActivityServiceService } from './activity-service.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FileDropModule
+    FileDropModule,
+    MatButtonModule, 
+    MatMenuModule
   ],
   providers: [ActivityServiceService],
   bootstrap: [AppComponent]

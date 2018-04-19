@@ -75,10 +75,23 @@ Install Angular 5:
 $ npm install @angular/cli -g
 ```
 
+Install stuff:
+```
+fit-convert-ng5 $ npm install
+```
+
+
+## How I made it:
+
 Create a new Angular 5 project:
 ```
 $ ng new fit-convert-ng5
 $ cd fit-convert-ng5/
+```
+
+Install Material:
+```
+$ npm install --save @angular/material @angular/cdk
 ```
 
 We'll also need the [FileSaver.js](https://github.com/eligrey/FileSaver.js/):
