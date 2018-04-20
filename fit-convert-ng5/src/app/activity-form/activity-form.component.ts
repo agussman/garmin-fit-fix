@@ -33,6 +33,7 @@ export class ActivityFormComponent implements OnInit {
   serverResponse: any = null;
   //fileBlob = new Blob([data], { type: 'text/xml' })
 
+  objectKeys = Object.keys;
   my_menu = {
     'main1': ['sub1', 'sub2'],
     'main2': ['sub1', 'sub2', 'sub3'],
