@@ -24,6 +24,7 @@ export class ActivityFormComponent implements OnInit {
   //statusCreateForm: FormGroup;
   statusFormGroup: FormGroup;
   fileDescription: FormControl;
+  pokemonControl: FormControl;
   downloadAvailable: FormControl;
   fileToUpload: File  = null;
   uploadProgress:number = 0;
@@ -38,7 +39,42 @@ export class ActivityFormComponent implements OnInit {
     'main1': ['sub1', 'sub2'],
     'main2': ['sub1', 'sub2', 'sub3'],
   };
+  
 
+  pokemonGroups = [
+    {
+      name: 'Grass',
+      pokemon: [
+        { value: 'bulbasaur-0', viewValue: 'Bulbasaur' },
+        { value: 'oddish-1', viewValue: 'Oddish' },
+        { value: 'bellsprout-2', viewValue: 'Bellsprout' }
+      ]
+    },
+    {
+      name: 'Water',
+      pokemon: [
+        { value: 'squirtle-3', viewValue: 'Squirtle' },
+        { value: 'psyduck-4', viewValue: 'Psyduck' },
+        { value: 'horsea-5', viewValue: 'Horsea' }
+      ]
+    },
+    {
+      name: 'Fire',
+      disabled: true,
+      pokemon: [
+        { value: 'charmander-6', viewValue: 'Charmander' },
+        { value: 'vulpix-7', viewValue: 'Vulpix' },
+        { value: 'flareon-8', viewValue: 'Flareon' }
+      ]
+    },
+    {
+      name: 'Psychic',
+      pokemon: [
+        { value: 'mew-9', viewValue: 'Mew' },
+        { value: 'mewtwo-10', viewValue: 'Mewtwo' },
+      ]
+    }
+  ];
 
   @ViewChild('myInput')
   myFileInput: any;
@@ -51,12 +87,15 @@ export class ActivityFormComponent implements OnInit {
       Validators.required,
       Validators.minLength(4),
       Validators.maxLength(280)
-    ])
+    ]);
+
+    this.pokemonControl = new FormControl();
 
     //this.statusCreateForm = new FormGroup({
     this.statusFormGroup = new FormGroup({
         'fileDescription': this.fileDescription,
-    })
+        'pokemonControl': this.pokemonControl
+    });
   }
 
   handleProgress(event) {
