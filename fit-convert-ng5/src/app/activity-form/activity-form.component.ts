@@ -40,6 +40,11 @@ export class ActivityFormComponent implements OnInit {
     'main2': ['sub1', 'sub2', 'sub3'],
   };
   
+  activityGroups = [
+    { name: "Run", level: 0 },
+    { name: "Indoor Run", level: 1},
+    { name: "Walk", level: 0}
+  ]
 
   pokemonGroups = [
     {

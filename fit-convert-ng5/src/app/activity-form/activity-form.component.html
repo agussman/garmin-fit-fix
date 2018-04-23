@@ -50,14 +50,10 @@
      </div>
 
      <mat-form-field>
-      <mat-select placeholder="Pokemon" [formControl]="pokemonControl">
-        <mat-option>-- None --</mat-option>
-        <mat-optgroup *ngFor="let group of pokemonGroups" [label]="group.name"
-                      [disabled]="group.disabled">
-          <mat-option *ngFor="let pokemon of group.pokemon" [value]="pokemon.value">
-            {{ pokemon.viewValue }}
+      <mat-select placeholder="Activity Type" [formControl]="pokemonControl">
+          <mat-option *ngFor="let pokemon of activityGroups" [value]="pokemon.value">
+            {{ pokemon.name }}
           </mat-option>
-        </mat-optgroup>
       </mat-select>
     </mat-form-field>
   
