@@ -50,10 +50,10 @@
      </div>
 
      <mat-form-field>
-      <mat-select placeholder="Activity Type" [formControl]="pokemonControl">
-          <mat-option *ngFor="let pokemon of activityGroups" [value]="pokemon.value">
-            {{ pokemon.name }}
-          </mat-option>
+      <mat-select placeholder="Favorite food">
+        <mat-option *ngFor="let food of foods" [value]="food.value" [ngStyle]="{'margin-left.px':getIndent(food.indent)}">
+          {{ food.viewValue }}
+        </mat-option>
       </mat-select>
     </mat-form-field>
   
