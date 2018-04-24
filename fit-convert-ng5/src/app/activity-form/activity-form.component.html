@@ -23,7 +23,7 @@
         <label for="file">Choose .FIT File</label>
             <input #myInput type="file"
                    id="file"
-                   (change)="handleFileInput($event.target.files)">
+                   (change)="handleFileInput($event.target.files)" required>
     </div>
     <div class="form-group">
         <label for="fileDescription">Activity Title</label>
@@ -41,22 +41,20 @@
         </div>
     </div>
 
+    <div class="form-group">
+      <label for="activityType">Activity Type</label>
+      <mat-form-field>
+        <mat-select placeholder="Activity Type">
+          <mat-option *ngFor="let food of foods" [value]="food.value" [ngStyle]="{'padding-left.px':getIndent(food.indent)}">
+            {{ food.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     <button type='submit' class='btn btn-default' [disabled]='statusFormGroup.invalid'>Submit</button>
     <button type='button' class='btn btn-default' (click)='resetAllInputs()'>Reset</button>
     <button type='button' class='btn btn-default' [disabled]='!uploadComplete' (click)='handleDownload()'>Download</button>
-  
-    <div *ngFor="let mainItem of objectKeys(my_menu)">
-      {{ mainItem }}
-     </div>
 
-     <mat-form-field>
-      <mat-select placeholder="Favorite food">
-        <mat-option *ngFor="let food of foods" [value]="food.value" [ngStyle]="{'margin-left.px':getIndent(food.indent)}">
-          {{ food.viewValue }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  
   </form>
 
 

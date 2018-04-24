@@ -47,7 +47,7 @@ export class ActivityFormComponent implements OnInit {
   ];
 
   getIndent(indent) {
-    return indent*10;
+    return 10 + indent*10;
   }
   
   @ViewChild('myInput')
