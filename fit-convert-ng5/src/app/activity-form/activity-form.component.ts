@@ -41,9 +41,10 @@ export class ActivityFormComponent implements OnInit {
   };
   
   foods = [
-    {value: 'Run', viewValue: 'Run', indent:0},
-    {value: 'Indoor Run', viewValue: 'Indoor Run', indent:1},
-    {value: 'Walk', viewValue: 'Walk', indent:0}
+    {value: 'running', viewValue: 'Running', indent:0},
+    {value: 'indoor running', viewValue: 'Indoor Running', indent:1},
+    {value: 'walking', viewValue: 'Walking', indent:0},
+    {value: 'speed walking', viewValue: 'Speed Walking', indent:10}
   ];
 
   getIndent(indent) {

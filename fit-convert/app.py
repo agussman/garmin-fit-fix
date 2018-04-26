@@ -123,10 +123,10 @@ def index():
         <time>2018-03-01T02:34:15.000Z</time>
       </metadata>
       <trk>
-        <name>Fairfax County Running</name>
-        <type>running</type>
+        <name>{}</name>
+        <type>{}</type>
         <trkseg>
-    '''
+    '''.format(data['fileDescription'], data['pokemonControl'])
 
     for point in points:
         trkpt = """
