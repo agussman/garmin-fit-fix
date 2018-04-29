@@ -44,7 +44,7 @@
     <div class="form-group">
       <label for="activityType">Activity Type</label>
       <mat-form-field>
-        <mat-select placeholder="Activity Type">
+        <mat-select id='pokemonControl' name='pokemonControl' formControlName='pokemonControl' placeholder="Activity Type">
           <mat-option *ngFor="let food of foods" [value]="food.value" [ngStyle]="{'padding-left.px':getIndent(food.indent)}">
             {{ food.viewValue }}
           </mat-option>
