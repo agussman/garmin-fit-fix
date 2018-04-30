@@ -69,8 +69,18 @@ def index():
             print("DO STUFF WITH FILE")
             fitfile = FitFile(part.content)
             data[name] = fitfile
+            # Extract filename
+            n = re.match('filename="(.*)"', cd[2])
+            if n is None:
+                # TODO Throw a proper warning
+                print("WARNING: Problem extracting filename")
+                data['filename'] = "download.gpx"
+            else:
+                # use filename in the output filename
+                data['filename'] = "{}.gpx".format(m.group(1))
         else:
             data[name] = part.content
+            print("data value {} = {}".format(name, part.content))
 
 
     #pprint(data)
@@ -151,7 +161,8 @@ def index():
 
 
 
-    return {'message': txt}
+    return {'message': txt,
+            'filename': data['filename']}
 
 
 # The view function above will return {"hello": "world"}
