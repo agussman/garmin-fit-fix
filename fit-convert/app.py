@@ -77,7 +77,7 @@ def index():
                 data['filename'] = "download.gpx"
             else:
                 # use filename in the output filename
-                data['filename'] = "{}.gpx".format(m.group(1))
+                data['filename'] = "{}.gpx".format(n.group(1))
         else:
             data[name] = part.content
             print("data value {} = {}".format(name, part.content))

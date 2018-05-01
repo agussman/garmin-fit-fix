@@ -32,6 +32,7 @@ export class ActivityFormComponent implements OnInit {
   uploadingProgressing:boolean = false;
   fileUploadSub: any;
   serverResponse: any = null;
+  serverFilename: any = null;
   //fileBlob = new Blob([data], { type: 'text/xml' })
 
   objectKeys = Object.keys;
@@ -91,10 +92,12 @@ export class ActivityFormComponent implements OnInit {
         // console.log(event.body);
         this.uploadComplete = true;
         this.serverResponse = event.body['message'];
+        this.serverFilename = event.body['filename'];
         console.log("response!");
-        console.log(event.body['message']);
-        console.log("again?");
-        console.log(this.serverResponse);
+        //console.log(event.body['message']);
+        console.log(event.body['filename']);
+        //console.log("again?");
+        //console.log(this.serverResponse);
       }
   }
 
@@ -134,7 +137,7 @@ export class ActivityFormComponent implements OnInit {
     handleDownload() {
         console.log("you are doing the file download thing");
         const fileBlob = new Blob([this.serverResponse], { type: 'text/xml' });
-        saveAs(fileBlob, "download.xml");
+        saveAs(fileBlob, this.serverFilename);
         console.log("guess we're done here?");
     }
 
