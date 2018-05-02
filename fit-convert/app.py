@@ -120,6 +120,9 @@ def index():
         #    f.write(gpx.to_xml())
         print('Created GPX:')
 
+    # Generate the output file
+    # Use the first point to set the overall <time>
+
     txt = '''<?xml version="1.0" encoding="UTF-8"?>
     <gpx creator="Garmin Connect" version="1.1"
       xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/11.xsd"
@@ -130,13 +133,13 @@ def index():
         <link href="connect.garmin.com">
           <text>Garmin Connect</text>
         </link>
-        <time>2018-03-01T02:34:15.000Z</time>
+        <time>{}</time>
       </metadata>
       <trk>
         <name>{}</name>
         <type>{}</type>
         <trkseg>
-    '''.format(data['fileDescription'], data['pokemonControl'])
+    '''.format(datetime_to_string(points[0]["time"]), data['fileDescription'], data['pokemonControl'])
 
     for point in points:
         trkpt = """
