@@ -1,23 +1,5 @@
 <div class="container">
     <h1>Fit Fixer</h1>
-    <form (ngSubmit)="onSubmit()" #activityForm="ngForm">
-      <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" required [(ngModel)]="model.title" name="title">
-      </div>
-
-      <div class="form-group">
-        <label for="activityType">Activity Type</label>
-        <select class="form-control" id="activityType" required [(ngModel)]="model.activityType" name="activityType">
-          <option *ngFor="let aType of activityTypes" [value]="aType">{{aType}}</option>
-        </select>
-      </div>
-
-      <button type="submit" class="btn btn-success" [disabled]="!activityForm.form.valid">Submit</button>
-      TODO: remove this: {{model.title}}
-    </form>
-
-
   <form [formGroup]='statusFormGroup' #statusNgForm="ngForm" (submit)='handleSubmit($event, statusNgForm, statusFormGroup)'>
     <div class="form-group">
         <label for="file">Choose .FIT File</label>
@@ -25,32 +7,7 @@
                    id="file"
                    (change)="handleFileInput($event.target.files)" required>
     </div>
-    <div class="form-group">
-        <label for="fileDescription">Activity Title</label>
-        <input type="text" class="form-control" id='fileDescription' required name='fileDescription' formControlName='fileDescription'>
-          <div *ngIf='fileDescription.invalid && (fileDescription.dirty || fileDescription.touched)'>
-            <div *ngIf='fileDescription.errors.required'>
-                Content is required.
-            </div>
-            <div *ngIf='fileDescription.errors.maxlength'>
-                Max length is 280
-            </div>
-            <div *ngIf='fileDescription.errors.minlength'>
-                Min length is 4
-            </div>
-        </div>
-    </div>
 
-    <div class="form-group">
-      <label for="activityType">Activity Type</label>
-      <mat-form-field>
-        <mat-select id='pokemonControl' name='pokemonControl' formControlName='pokemonControl' placeholder="Activity Type">
-          <mat-option *ngFor="let food of foods" [value]="food.value" [ngStyle]="{'padding-left.px':getIndent(food.indent)}">
-            {{ food.viewValue }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
     <button type='submit' class='btn btn-default' [disabled]='statusFormGroup.invalid'>Submit</button>
     <button type='button' class='btn btn-default' (click)='resetAllInputs()'>Reset</button>
     <button type='button' class='btn btn-default' [disabled]='!uploadComplete' (click)='handleDownload()'>Download</button>
@@ -58,12 +15,5 @@
   </form>
 
 
-
-
-
-
-
-  Progress:
-<div style='width:%;background-color:#007cae;'><span *ngIf='uploadProgress > 25'>%</span></div>
 
 </div>

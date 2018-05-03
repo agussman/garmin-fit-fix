@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators, NgForm } from '@angular/forms';
 import { HttpClient, HttpHeaders, HttpEventType, HttpRequest, HttpErrorResponse, HttpEvent } from '@angular/common/http';
 
 import { saveAs } from 'file-saver/FileSaver';
-import { UploadEvent, UploadFile } from 'ngx-file-drop';
 
 import { Activity } from '../activity';
 import { ActivityServiceService } from '../activity-service.service';
@@ -14,8 +13,6 @@ import { ActivityServiceService } from '../activity-service.service';
   styleUrls: ['./activity-form.component.css']
 })
 export class ActivityFormComponent implements OnInit {
-
-  activityTypes = ['Running', 'Walking', 'Uncategorized'];
 
   submitted = false;
 
@@ -36,23 +33,7 @@ export class ActivityFormComponent implements OnInit {
   //fileBlob = new Blob([data], { type: 'text/xml' })
 
   objectKeys = Object.keys;
-  my_menu = {
-    'main1': ['sub1', 'sub2'],
-    'main2': ['sub1', 'sub2', 'sub3'],
-  };
-  
-  foods = [
-    {value: 'running', viewValue: 'Running', indent:0},
-    {value: 'indoor running', viewValue: 'Indoor Running', indent:1},
-    {value: 'walking', viewValue: 'Walking', indent:0},
-    {value: 'speed walking', viewValue: 'Speed Walking', indent:1},
-    {value: 'hiking', viewValue: 'Hiking', indent:0}
-  ];
 
-  getIndent(indent) {
-    return 10 + indent*10;
-  }
-  
   @ViewChild('myInput')
   myFileInput: any;
 
@@ -60,32 +41,21 @@ export class ActivityFormComponent implements OnInit {
   constructor(private _as:ActivityServiceService) { }
 
   ngOnInit() {
-    this.fileDescription = new FormControl("", [
-      Validators.required,
-      Validators.minLength(4),
-      Validators.maxLength(280)
-    ]);
-
-    this.pokemonControl = new FormControl();
-
-    //this.statusCreateForm = new FormGroup({
     this.statusFormGroup = new FormGroup({
-        'fileDescription': this.fileDescription,
-        'pokemonControl': this.pokemonControl
     });
   }
 
   handleProgress(event) {
-        if (event.type === HttpEventType.DownloadProgress) {
+      if (event.type === HttpEventType.DownloadProgress) {
         //this.uploadingProgressing =true
         //this.uploadProgress = Math.round(100 * event.loaded / event.total)
-        console.log("download progress");
+        console.log("download...");
       }
 
       if (event.type === HttpEventType.UploadProgress) {
         //this.uploadingProgressing =true
         //this.uploadProgress = Math.round(100 * event.loaded / event.total)
-        console.log("upload?");
+        console.log("upload...");
       }
 
       if (event.type === HttpEventType.Response) {
@@ -96,8 +66,6 @@ export class ActivityFormComponent implements OnInit {
         console.log("response!");
         //console.log(event.body['message']);
         console.log(event.body['filename']);
-        //console.log("again?");
-        //console.log(this.serverResponse);
       }
   }
 
@@ -121,11 +89,11 @@ export class ActivityFormComponent implements OnInit {
       }
   }
 
-      handleFileInput(files: FileList) {
-        let fileItem = files.item(0);
-        console.log("file input has changed. The file is", fileItem)
-        this.fileToUpload = fileItem
-    }
+  handleFileInput(files: FileList) {
+     let fileItem = files.item(0);
+     console.log("file input has changed. The file is", fileItem)
+     this.fileToUpload = fileItem
+  }
 
     resetAllInputs() {
         console.log(this.myFileInput.nativeElement.files);

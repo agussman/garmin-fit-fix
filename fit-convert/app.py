@@ -136,10 +136,10 @@ def index():
         <time>{}</time>
       </metadata>
       <trk>
-        <name>{}</name>
-        <type>{}</type>
+        <name>Unknown Activity</name>
+        <type>Unknown Type</type>
         <trkseg>
-    '''.format(datetime_to_string(points[0]["time"]), data['fileDescription'], data['pokemonControl'])
+    '''.format(datetime_to_string(points[0]["time"]))
 
     for point in points:
         trkpt = """
