@@ -16,23 +16,11 @@ export class ActivityFormComponent implements OnInit {
 
   submitted = false;
 
-  model = new Activity("Default Activity", "Running");
-
-  //statusCreateForm: FormGroup;
   statusFormGroup: FormGroup;
-  fileDescription: FormControl;
-  pokemonControl: FormControl;
-  downloadAvailable: FormControl;
   fileToUpload: File  = null;
-  uploadProgress:number = 0;
-  uploadComplete:boolean = false;
-  uploadingProgressing:boolean = false;
   fileUploadSub: any;
   serverResponse: any = null;
   serverFilename: any = null;
-  //fileBlob = new Blob([data], { type: 'text/xml' })
-
-  objectKeys = Object.keys;
 
   @ViewChild('myInput')
   myFileInput: any;
@@ -95,11 +83,12 @@ export class ActivityFormComponent implements OnInit {
      this.fileToUpload = fileItem
   }
 
-    resetAllInputs() {
+    resetAllInputs(statusNgForm:NgForm) {
         console.log(this.myFileInput.nativeElement.files);
         this.myFileInput.nativeElement.value = "";
         console.log(this.myFileInput.nativeElement.files);
-        //statusNgForm.resetForm({});
+        //this.uploadComplete = false;
+        statusNgForm.resetForm({});
     }
 
     handleDownload() {
@@ -109,28 +98,5 @@ export class ActivityFormComponent implements OnInit {
         console.log("guess we're done here?");
     }
 
-  onSubmit() {
-    this.submitted = true;
-    console.log("You clicked Submit!");
-    // TODO: This is an observable, subscribe to it???
-    this._as.processActivity(this.model).subscribe(res => console.log(res));
-    //this._as.processActivity(this.model).subscribe(res => {
-      //console.log(res);
-      //console.log("hi");
-      //this.handleResponse(res);
-    //});
-    //let url = `${this.apiRoot}/process`;
-    //this.http.get(url).subscribe(res => console.log(res.text()));
-    //this.http.post(url, JSON.stringify(this.model), {headers: new HttpHeaders({'Content-Type': 'application/json'})} ).subscribe(res => console.log(res.text()));
-    console.log("Done with onSubmit");
-  }
-
-  handleResponse(res) {
-    //console.log(res);
-    console.log("Now do file stuff");
-  }
-
-  // TODO: Remove this when we're done
-  get diagnostic() { return JSON.stringify(this.model); }
 
 }
