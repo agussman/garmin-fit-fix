@@ -8,7 +8,7 @@
                    (change)="handleFileInput($event.target.files)" required >
     </div>
 
-    <button type='submit' class='btn btn-default' [disabled]='statusFormGroup.invalid'>Submit</button>
+    <button type='submit' class='btn btn-default' [disabled]='checkInvalidity()'>Submit</button>
     <button type='button' class='btn btn-default' (click)='resetAllInputs(statusNgForm)'>Reset</button>
     <button type='button' class='btn btn-default' [disabled]='!uploadComplete' (click)='handleDownload()'>Download</button>
 

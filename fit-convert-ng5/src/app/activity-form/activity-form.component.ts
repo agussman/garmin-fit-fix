@@ -33,6 +33,15 @@ export class ActivityFormComponent implements OnInit {
     });
   }
 
+  checkInvalidity() {
+    // if the input file is invalid, return false
+    if (!this.fileToUpload) {
+      return true;
+    }
+    // otherwise return the standard form validity
+    return this.statusFormGroup.invalid;
+  }
+
   handleProgress(event) {
       if (event.type === HttpEventType.DownloadProgress) {
         //this.uploadingProgressing =true
@@ -71,8 +80,7 @@ export class ActivityFormComponent implements OnInit {
                         console.log("Server error")
                     });
 
-          this.resetAllInputs();
-          statusNgForm.resetForm({});
+          this.resetAllInputs(statusNgForm);
           console.log("Actually Done with handleSubmit");
       }
   }
@@ -84,6 +92,7 @@ export class ActivityFormComponent implements OnInit {
   }
 
     resetAllInputs(statusNgForm:NgForm) {
+        this.fileToUpload = null;
         console.log(this.myFileInput.nativeElement.files);
         this.myFileInput.nativeElement.value = "";
         console.log(this.myFileInput.nativeElement.files);
