@@ -21,6 +21,7 @@ export class ActivityFormComponent implements OnInit {
   fileUploadSub: any;
   serverResponse: any = null;
   serverFilename: any = null;
+  uploadComplete: boolean = false;
 
   @ViewChild('myInput')
   myFileInput: any;
@@ -96,7 +97,7 @@ export class ActivityFormComponent implements OnInit {
         console.log(this.myFileInput.nativeElement.files);
         this.myFileInput.nativeElement.value = "";
         console.log(this.myFileInput.nativeElement.files);
-        //this.uploadComplete = false;
+        this.uploadComplete = false;
         statusNgForm.resetForm({});
     }
 
