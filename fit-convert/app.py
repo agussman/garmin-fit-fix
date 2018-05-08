@@ -102,7 +102,7 @@ def index():
                 else:
                     #print(" * %s: %s" % (record_data.name, record_data.value))
                     datum[record_data.name] = record_data.value
-            print("TS: {}".format(datum['timestamp']))
+            # print("TS: {}".format(datum['timestamp']))
             point = {
                 'elevation': datum['altitude'],
                 #'time': string_to_datetime(datum['timestamp']),
