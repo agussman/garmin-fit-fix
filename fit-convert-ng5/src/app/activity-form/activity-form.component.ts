@@ -22,6 +22,7 @@ export class ActivityFormComponent implements OnInit {
   serverResponse: any = null;
   serverFilename: any = null;
   uploadComplete: boolean = false;
+  currentTab: number = 0;
 
   @ViewChild('myInput')
   myFileInput: any;
@@ -82,6 +83,7 @@ export class ActivityFormComponent implements OnInit {
                     });
 
           this.resetAllInputs(statusNgForm);
+          this.currentTab = 1;
           console.log("Actually Done with handleSubmit");
       }
   }

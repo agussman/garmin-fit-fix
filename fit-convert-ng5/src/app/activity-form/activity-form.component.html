@@ -1,5 +1,5 @@
 <h1>Fit Fixer</h1>
-<mat-tab-group>
+<mat-tab-group [selectedIndex]="currentTab">
     <mat-tab label="One">
 <div class="container">
   <form [formGroup]='statusFormGroup' #statusNgForm="ngForm" (submit)='handleSubmit($event, statusNgForm, statusFormGroup)'>
