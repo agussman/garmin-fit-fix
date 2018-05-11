@@ -1,6 +1,15 @@
-<h1>Fit Fixer</h1>
+<mat-card class="wholeBox">
+  <mat-card-content>
+<h2>Fit Fixer</h2>
+      <div>
+          Upload a .fit file to be converted into a .gpx you can upload into Garmin Connect. This tool will attempt to parse
+          as many waypoints as possible from a corrupted input file.
+      </div>
 <mat-tab-group [selectedIndex]="currentTab">
-    <mat-tab label="One">
+    <mat-tab label="Upload">
+        <ng-template mat-tab-label>
+          <mat-icon>cloud_upload</mat-icon>
+        </ng-template>
 <div class="container">
   <form [formGroup]='statusFormGroup' #statusNgForm="ngForm" (submit)='handleSubmit($event, statusNgForm, statusFormGroup)'>
     <div class="form-group">
@@ -20,9 +29,14 @@
 
 </div>
 </mat-tab>
-<mat-tab label="Two">
+<mat-tab label="Download" [disabled]='!uploadComplete'>
+     <ng-template mat-tab-label>
+          <mat-icon>cloud_download</mat-icon>
+        </ng-template>
     <div class="container">
     <button type='button' class='btn btn-default' [disabled]='!uploadComplete' (click)='handleDownload()'>Download</button>
 </div>
 </mat-tab>
 </mat-tab-group>
+        </mat-card-content>
+</mat-card>

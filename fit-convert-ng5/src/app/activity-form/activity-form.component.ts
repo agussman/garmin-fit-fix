@@ -79,6 +79,7 @@ export class ActivityFormComponent implements OnInit {
                 submittedData).subscribe(
                     event=>this.handleProgress(event),
                     error=>{
+                    // TODO: Introduce a proper error message
                         console.log("Server error")
                     });
 
@@ -100,6 +101,7 @@ export class ActivityFormComponent implements OnInit {
         this.myFileInput.nativeElement.value = "";
         console.log(this.myFileInput.nativeElement.files);
         this.uploadComplete = false;
+        this.currentTab = 0;
         statusNgForm.resetForm({});
     }
 
