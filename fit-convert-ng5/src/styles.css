@@ -2,15 +2,18 @@
 @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 
-.basic-container {
-  padding: 30px;
-}
-
-.container {
-  padding-top: 10px;
-  max-width: 450px;
+body {
+  background: linear-gradient(110deg, #cdfd3b 60%, #edff4b 60%);
 }
 
 .wholeBox {
+  padding-top: 30px;
   max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
 }
+
+.tabContent {
+  padding-top: 10px;
+}
+
