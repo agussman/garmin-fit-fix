@@ -167,3 +167,4 @@ Check at http://localhost:4200/
  * [Parsing multipart/form-data with Chalice](https://stackoverflow.com/questions/45136349/parsing-raw-body-from-aws-chalice-multipart-form-data-http-request)
  * [Simple FileSaver.js example](https://shekhargulati.com/2017/07/16/implementing-file-save-functionality-with-angular-4/)
  * [More in-depth use of FileSaver.js with Angular](http://amilspage.com/angular4-file-download/)
+ * [Getting the Twitter and GitHub icons to work](https://materialdesignicons.com/getting-started)
