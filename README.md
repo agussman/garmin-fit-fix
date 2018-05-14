@@ -152,6 +152,13 @@ fit-convert-ng5 $ ng serve
 
 Check at http://localhost:4200/
 
+# Deploying
+
+Deploying the Angular site to S3:
+```
+fit-convert-ng5 $ ng build --prod
+
+
 # References
 
  * [Mapexplorer.com](http://maplorer.com/gpx-view/gpx_view.php) - Useful site for visualizing gpx files even if you can't get them to load in Garmin Connect
@@ -168,3 +175,4 @@ Check at http://localhost:4200/
  * [Simple FileSaver.js example](https://shekhargulati.com/2017/07/16/implementing-file-save-functionality-with-angular-4/)
  * [More in-depth use of FileSaver.js with Angular](http://amilspage.com/angular4-file-download/)
  * [Getting the Twitter and GitHub icons to work](https://materialdesignicons.com/getting-started)
+ * [Deploying an Angular App to S3](https://johnlouros.com/blog/uploading-a-angular-app-to-S3-with-npm)
