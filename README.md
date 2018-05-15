@@ -154,9 +154,22 @@ Check at http://localhost:4200/
 
 # Deploying
 
-Deploying the Angular site to S3:
+Normally to build a deployment of an Angular app you do:
 ```
 fit-convert-ng5 $ ng build --prod
+```
+
+Install the AWS SDK for npm
+```
+fit-convert-ng5 $ npm install aws-sdk --save-dev
+fit-convert-ng5 $ npm install mime-types --save-dev
+
+```
+
+
+
+
+
 
 
 # References
@@ -175,4 +188,5 @@ fit-convert-ng5 $ ng build --prod
  * [Simple FileSaver.js example](https://shekhargulati.com/2017/07/16/implementing-file-save-functionality-with-angular-4/)
  * [More in-depth use of FileSaver.js with Angular](http://amilspage.com/angular4-file-download/)
  * [Getting the Twitter and GitHub icons to work](https://materialdesignicons.com/getting-started)
- * [Deploying an Angular App to S3](https://johnlouros.com/blog/uploading-a-angular-app-to-S3-with-npm)
+ * [Deploying an Angular App to S3](https://johnlouros.com/blog/uploading-a-angular-app-to-S3-with-npm) <-- probably not doing this
+ * [Git-backed static website powered entirely by AWS](https://github.com/alestic/aws-git-backed-static-website)
