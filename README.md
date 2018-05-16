@@ -190,3 +190,4 @@ fit-convert-ng5 $ npm install mime-types --save-dev
  * [Getting the Twitter and GitHub icons to work](https://materialdesignicons.com/getting-started)
  * [Deploying an Angular App to S3](https://johnlouros.com/blog/uploading-a-angular-app-to-S3-with-npm) <-- probably not doing this
  * [Git-backed static website powered entirely by AWS](https://github.com/alestic/aws-git-backed-static-website)
+ * [Continuous Delivery to S3 via CodepIpeline and Codebuild](https://stelligent.com/2017/09/05/continuous-delivery-to-s3-via-codepipeline-and-codebuild/)s
