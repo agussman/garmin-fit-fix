@@ -29,15 +29,15 @@ def index():
     return {'hello': 'AARON2'}
 
 @app.route('/a2')
-def index():
-    return {'hello': 'This is A2'}
+def index2():
+    return {'hello': 'This is A3'}
 
 @app.route('/introspect')
 def introspect():
     return app.current_request.to_dict()
 
 @app.route('/process', methods=['POST'], cors=True, content_types=['multipart/form-data'])
-def index():
+def index3():
 
     # Dict to populate with passed-in form data
     data = {}

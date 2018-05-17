@@ -7,7 +7,7 @@ import { Activity } from './activity';
 export class ActivityServiceService {
 
   apiRoot: string = "http://127.0.0.1:8000";
-
+  
   constructor(private _htc:HttpClient) { }
 
   processActivity(myActivity: Activity) {

@@ -154,9 +154,29 @@ Check at http://localhost:4200/
 
 # Deploying
 
+A successful chalice deployment will look like:
+```
+(fit-convert) fit-convert $ chalice deploy
+Regen deployment package.
+Updating IAM policy for role: fit-convert-dev
+Updating lambda function: fit-convert-dev
+API Gateway rest API already found: md5ishstring
+Deploying to API Gateway stage: api
+https://md5ishstring.execute-api.us-east-1.amazonaws.com/api/
+```
+
+_[I think this has been fixed in newer versions]_ A failure to deploy will likely give you a cryptic message, possibly not even indicating a failure occurred:
+```
+(fit-convert) fit-convert $ chalice deploy
+Regen deployment package.
+'data'
+```
+Anecdotally, this can be caused by having two functions with the same name (shoutout to `chalice local` that will still run without balking)
+
+
 Normally to build a deployment of an Angular app you do:
 ```
-fit-convert-ng5 $ ng build --prod
+fit-convert-ng5 $ ng build --prod --aot
 ```
 
 Install the AWS SDK for npm
