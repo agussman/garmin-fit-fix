@@ -39,6 +39,8 @@ def introspect():
 @app.route('/process', methods=['POST'], cors=True, content_types=['multipart/form-data'])
 def index3():
 
+    return app.current_request.json_body
+
     # Dict to populate with passed-in form data
     data = {}
 
