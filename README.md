@@ -165,6 +165,9 @@ Deploying to API Gateway stage: api
 https://md5ishstring.execute-api.us-east-1.amazonaws.com/api/
 ```
 
+
+Some things to watch out for:
+
 _[I think this has been fixed in newer versions]_ A failure to deploy will likely give you a cryptic message, possibly not even indicating a failure occurred:
 ```
 (fit-convert) fit-convert $ chalice deploy
@@ -172,6 +175,14 @@ Regen deployment package.
 'data'
 ```
 Anecdotally, this can be caused by having two functions with the same name (shoutout to `chalice local` that will still run without balking)
+
+Generally, `chalice local` is awesome, but there are situations where it is able to serve content that will fail when you actually `chalice deploy` to AWS. A good place to start debugging these failures is APIGateway.
+
+* If you get a `502` error and a `{"message": "Internal server error"}` response, it's possibly an error with serializing the response to JSON (e.g., it can't).
+* APIGateway can be wonky with binary data. I had to tell chalice that `multipart/form-data` was binary by setting `app.api.binary_types`.
+* Check for error logs under [Cloudwatch](https://console.aws.amazon.com/cloudwatch/). 
+
+
 
 
 Normally to build a deployment of an Angular app you do:
@@ -185,7 +196,6 @@ fit-convert-ng5 $ npm install aws-sdk --save-dev
 fit-convert-ng5 $ npm install mime-types --save-dev
 
 ```
-
 
 
 
