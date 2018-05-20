@@ -165,7 +165,6 @@ Deploying to API Gateway stage: api
 https://md5ishstring.execute-api.us-east-1.amazonaws.com/api/
 ```
 
-
 Some things to watch out for:
 
 _[I think this has been fixed in newer versions]_ A failure to deploy will likely give you a cryptic message, possibly not even indicating a failure occurred:
@@ -183,12 +182,24 @@ Generally, `chalice local` is awesome, but there are situations where it is able
 * Check for error logs under [Cloudwatch](https://console.aws.amazon.com/cloudwatch/). 
 
 
+We're going to deploy the Angular frontend to S3 as a static website.
 
+First we need to create an S3 bucket for this purpose and configure it for static website hosting.
 
 Normally to build a deployment of an Angular app you do:
 ```
 fit-convert-ng5 $ ng build --prod --aot
 ```
+
+This can then be copied to our S3 bucket with:
+```
+$ aws s3 cp ./dist/ s3://fit-convert --recursive --acl public-read
+```
+
+
+
+
+
 
 Install the AWS SDK for npm
 ```
@@ -218,6 +229,8 @@ fit-convert-ng5 $ npm install mime-types --save-dev
  * [Simple FileSaver.js example](https://shekhargulati.com/2017/07/16/implementing-file-save-functionality-with-angular-4/)
  * [More in-depth use of FileSaver.js with Angular](http://amilspage.com/angular4-file-download/)
  * [Getting the Twitter and GitHub icons to work](https://materialdesignicons.com/getting-started)
+ * [Posting multipart/form-data to APIGateway](https://stackoverflow.com/questions/41756190/api-gateway-post-multipart-form-data)
+ * [Hosting a static website on AWS S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/HostingWebsiteOnS3Setup.html)
  * [Deploying an Angular App to S3](https://johnlouros.com/blog/uploading-a-angular-app-to-S3-with-npm) <-- probably not doing this
  * [Git-backed static website powered entirely by AWS](https://github.com/alestic/aws-git-backed-static-website)
  * [Continuous Delivery to S3 via CodepIpeline and Codebuild](https://stelligent.com/2017/09/05/continuous-delivery-to-s3-via-codepipeline-and-codebuild/)s
