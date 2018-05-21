@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpEventType, HttpRequest, HttpErrorResponse, HttpEvent} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import { Activity } from './activity';
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class ActivityServiceService {
 
-  apiRoot: string = "http://127.0.0.1:8000";
-  
+  apiRoot: string = environment.apiRoot;
+
   constructor(private _htc:HttpClient) { }
 
   processActivity(myActivity: Activity) {
