@@ -1,10 +1,22 @@
 # Overview
 
-Fix corrupted Garmin `.fit` files via an AWS Lambda service that converts them into `.gpx` format. The service is written in Python 3 and we'll use AWS Chalice to deploy.
+Fix corrupted Garmin `.fit` files via an AWS Lambda service that converts them into `.gpx` format. Crucially, Garmin Connect will actually import it. The service is written in Python 3, with an AWS Lambda backend manged by AWS Chalice, and a front-end written in Angular 5.
+
+The repo contains:
+```
+ |
+ |\_ fit-convert-ng5 : Angular 5 Front-End
+ |
+ |\_ fit-convert : Python 3 backend, deploying to AWS Lambda with AWS Chalice
+ |
+  \_ fit-convert.ipynb : Python notebook with code detrius of me figuring out how to do the conversion
+```
+
+Note that this README is less about setup/running the project and more akin to a tutorial/blog post about how the code came to be.
 
 # Baseline Environment Setup
 
-Before we get started, make sure you've got your AWS credentials setup correctly.
+You'll need to [install the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/installing.html) for your platform and make sure you've got your [AWS credentials setup](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-quick-configuration) correctly
 
 Chalice will balk if you're not running (at least) Python 3.6, which means I need to yolo and update my machine's Python 3.5 install. On OSX this is pretty straightforward:
 ```
@@ -17,8 +29,6 @@ $ pip install --upgrade pip
 $ pip3 install --upgrade virtualenvwrapper
 ```
 
-We'll mostly be following the steps in the [Chalice Quickstart](http://chalice.readthedocs.io/en/latest/quickstart.html), only we'll be using `virtualenvwrapper` because we are not plebes. 
-
 Make sure you have Node.js and `npm` installed:
 ```
 $ brew install npm
@@ -26,6 +36,8 @@ $ brew install npm
 
 
 # Chalice Setup
+
+We'll mostly be following the steps in the [Chalice Quickstart](http://chalice.readthedocs.io/en/latest/quickstart.html), only we'll be using `virtualenvwrapper` because we are not plebes. 
 
 Create a virtualenv and install `chalice`:
 
@@ -46,10 +58,11 @@ As you're going through the intro, if you get a message like:
     "message": "Missing Authentication Token"
 }
 ```
-it means you attempted to access a non-existant endpoint (check for a typos in the URL)
+it means you attempted to access a non-existent endpoint (check for a typos in the URL)
 
+## Testing out Chalice
 
-# Testing it out
+I made a change to `index()` in `app.py`.
 
 Run chalice locally:
 ```
@@ -57,7 +70,7 @@ $ chalice local
 Serving on 127.0.0.1:8000
 ```
 
-hit the end point:
+Hit the end point to confirm it works:
 ```
 $ curl 127.0.0.1:8000
 {"hello": "AARON2"}
@@ -68,7 +81,7 @@ For development purposes, we'll want to add `cors=True` to the API endpoints (th
 @app.route('/', cors=True)
 ```
 
-# Angular Crap
+# Angular Setup
 
 Install Angular 5:
 ```
@@ -80,14 +93,13 @@ Install stuff:
 fit-convert-ng5 $ npm install
 ```
 
-
-## How I made it:
-
 Create a new Angular 5 project:
 ```
 $ ng new fit-convert-ng5
 $ cd fit-convert-ng5/
 ```
+
+## Angular Development
 
 Install Material:
 ```
@@ -98,6 +110,8 @@ We'll also need the [FileSaver.js](https://github.com/eligrey/FileSaver.js/):
 ```
 $ npm install --save file-saver
 ```
+
+_<DEPRECATED>_
 
 Create an `Activity` class:
 ```
@@ -122,6 +136,8 @@ $ ng generate component ActivityForm
 ```
 
 <Put stuff in ActivityForm>
+
+_</DEPRECATED>_
 
 Create an `ActivityService`:
 ```
@@ -152,7 +168,7 @@ fit-convert-ng5 $ ng serve
 
 Check at http://localhost:4200/
 
-# Deploying
+# Configuration and Deployment
 
 A successful chalice deployment will look like:
 ```
@@ -175,7 +191,7 @@ Regen deployment package.
 ```
 Anecdotally, this can be caused by having two functions with the same name (shoutout to `chalice local` that will still run without balking)
 
-Generally, `chalice local` is awesome, but there are situations where it is able to serve content that will fail when you actually `chalice deploy` to AWS. A good place to start debugging these failures is APIGateway.
+Generally, `chalice local` is awesome, but there are situations where it is able to serve content that will fail when you actually `chalice deploy` to AWS. Assuming the error has something to do with APIGateway is a reasonable starting point for debugging.
 
 * If you get a `502` error and a `{"message": "Internal server error"}` response, it's possibly an error with serializing the response to JSON (e.g., it can't).
 * APIGateway can be wonky with binary data. I had to tell chalice that `multipart/form-data` was binary by setting `app.api.binary_types`.
@@ -184,29 +200,32 @@ Generally, `chalice local` is awesome, but there are situations where it is able
 
 We're going to deploy the Angular frontend to S3 as a static website.
 
-First we need to create an S3 bucket for this purpose and configure it for static website hosting.
+First we need to create an S3 bucket for this purpose and configure it for static website hosting ([see Steps 1-2 here](https://docs.aws.amazon.com/AmazonS3/latest/dev/HostingWebsiteOnS3Setup.html)).
 
-Normally to build a deployment of an Angular app you do:
+We'll also want to update the production configuration of the app by setting the `apiRoot` in `environment.prod.ts` to the endpoint created by Chalice:
+```
+export const environment = {
+  production: true,
+  apiRoot: 'https://md5ishstring.execute-api.us-east-1.amazonaws.com/api/'
+};
+```
+
+If you're like me and you feel that it is, to use technical jargon, "sketchy" to post a URL like that to a public git repo, you can ignore changes to this file with:
+```
+$ git update-index --assume-unchanged src/environments/environment.prod.ts
+```
+Note that this is different than updating `.gitignore` and removing it from cache, because the file will continue to persist in your repo.
+
+Next, build a deployment/production version of the Angular app:
 ```
 fit-convert-ng5 $ ng build --prod --aot
 ```
 
-This can then be copied to our S3 bucket with:
+This can then be copied to our S3 bucket with (you may need to do this from your virtualenv):
 ```
-$ aws s3 cp ./dist/ s3://fit-convert --recursive --acl public-read
+$ aws s3 sync --acl public-read --delete ./dist/ s3://fit-convert
 ```
 
-
-
-
-
-
-Install the AWS SDK for npm
-```
-fit-convert-ng5 $ npm install aws-sdk --save-dev
-fit-convert-ng5 $ npm install mime-types --save-dev
-
-```
 
 
 
@@ -231,6 +250,7 @@ fit-convert-ng5 $ npm install mime-types --save-dev
  * [Getting the Twitter and GitHub icons to work](https://materialdesignicons.com/getting-started)
  * [Posting multipart/form-data to APIGateway](https://stackoverflow.com/questions/41756190/api-gateway-post-multipart-form-data)
  * [Hosting a static website on AWS S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/HostingWebsiteOnS3Setup.html)
+ * [Ultimate Guide to Deploying Static Sites on AWS](https://stormpath.com/blog/ultimate-guide-deploying-static-site-aws)
  * [Deploying an Angular App to S3](https://johnlouros.com/blog/uploading-a-angular-app-to-S3-with-npm) <-- probably not doing this
  * [Git-backed static website powered entirely by AWS](https://github.com/alestic/aws-git-backed-static-website)
- * [Continuous Delivery to S3 via CodepIpeline and Codebuild](https://stelligent.com/2017/09/05/continuous-delivery-to-s3-via-codepipeline-and-codebuild/)s
+ * [Continuous Delivery to S3 via CodePipeline and Codebuild](https://stelligent.com/2017/09/05/continuous-delivery-to-s3-via-codepipeline-and-codebuild/)s

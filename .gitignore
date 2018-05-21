@@ -3,5 +3,9 @@
 .ipynb_checkpoints/
 *pyc
 
+
+# Don't commit local data for development
+data*
+
 # Don't commit production environment variables to git
 *environment.prod.ts
