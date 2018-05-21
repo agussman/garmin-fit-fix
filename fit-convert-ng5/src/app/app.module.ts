@@ -7,8 +7,6 @@ import { AppComponent } from './app.component';
 import { MatButtonModule, MatMenuModule, MatTabsModule, MatIconModule, MatCardModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import { FileDropModule } from 'ngx-file-drop';
-
 import { ActivityFormComponent } from './activity-form/activity-form.component';
 import { ActivityServiceService } from './activity-service.service';
 
@@ -23,8 +21,7 @@ import { ActivityServiceService } from './activity-service.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FileDropModule,
-    MatButtonModule, 
+    MatButtonModule,
     MatMenuModule,
     MatSelectModule,
     MatTabsModule,
