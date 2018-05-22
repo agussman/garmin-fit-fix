@@ -200,7 +200,7 @@ Generally, `chalice local` is awesome, but there are situations where it is able
 
 We're going to deploy the Angular frontend to S3 as a static website.
 
-First we need to create an S3 bucket for this purpose and configure it for static website hosting ([see Steps 1-2 here](https://docs.aws.amazon.com/AmazonS3/latest/dev/HostingWebsiteOnS3Setup.html)).
+First we need to create an S3 bucket for this purpose and configure it for static website hosting ([see Steps 1-2 here](https://docs.aws.amazon.com/AmazonS3/latest/dev/HostingWebsiteOnS3Setup.html)). If you are using a custom domain, follow [these instructions](https://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html).
 
 We'll also want to update the production configuration of the app by setting the `apiRoot` in `environment.prod.ts` to the endpoint created by Chalice:
 ```
