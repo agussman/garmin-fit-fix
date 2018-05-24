@@ -1,4 +1,4 @@
-from chalice import Chalice
+from chalice import Chalice, CORSConfig
 
 import re
 from datetime import datetime
@@ -11,6 +11,10 @@ from pprint import pprint
 app = Chalice(app_name='fit-convert')
 app.debug = True
 app.api.binary_types = [ 'multipart/form-data' ]
+
+cors_config = CORSConfig(
+    allow_origin='http://fit-converter.com',
+)
 
 def semicircles_to_degrees(semicircle):
     # 2147483648 = 2^31
@@ -37,7 +41,7 @@ def index2():
 def introspect():
     return app.current_request.to_dict()
 
-@app.route('/process', methods=['POST'], cors=True, content_types=['multipart/form-data'])
+@app.route('/process', methods=['POST'], cors=cors_config, content_types=['multipart/form-data'])
 def index3():
 
     # Dict to populate with passed-in form data
