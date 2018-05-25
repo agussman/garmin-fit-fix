@@ -170,7 +170,9 @@ Check at http://localhost:4200/
 
 # Configuration and Deployment
 
-A successful chalice deployment will look like:
+We're going to deploy the Angular frontend to S3 as a static website. The backend will be deployed with chalice. There's a slight "chicken and the egg" dependency between the two. We need to know the API Gateway url to set `apiRoot` in our front-end. But, to successfully enable CORS on the backend, we need to know the front-end URL (either an S3 bucket url, or our own custom domain).
+
+We will deploy chalice by running `chalice deploy`. A successful chalice deployment will look like:
 ```
 (fit-convert) fit-convert $ chalice deploy
 Regen deployment package.
@@ -183,26 +185,25 @@ https://md5ishstring.execute-api.us-east-1.amazonaws.com/api/
 
 Some things to watch out for:
 
-_[I think this has been fixed in newer versions]_ A failure to deploy will likely give you a cryptic message, possibly not even indicating a failure occurred:
+A failure to deploy will likely give you a cryptic message, possibly not even indicating a failure occurred _[I think this has been fixed in newer versions]_:
 ```
 (fit-convert) fit-convert $ chalice deploy
 Regen deployment package.
 'data'
 ```
-Anecdotally, this can be caused by having two functions with the same name (shoutout to `chalice local` that will still run without balking)
+This could be caused by having two functions with the same name (shoutout to `chalice local` that will still run without balking).
 
-Generally, `chalice local` is awesome, but there are situations where it is able to serve content that will fail when you actually `chalice deploy` to AWS. Assuming the error has something to do with APIGateway is a reasonable starting point for debugging.
+Generally, `chalice local` is awesome, but there are situations where it is able to serve content that will fail when you actually `chalice deploy` to AWS. A reasonable starting point for debugging would be to assume the error has something to do with APIGateway.
 
 * If you get a `502` error and a `{"message": "Internal server error"}` response, it's possibly an error with serializing the response to JSON (e.g., it can't).
 * APIGateway can be wonky with binary data. I had to tell chalice that `multipart/form-data` was binary by setting `app.api.binary_types`.
 * Check for error logs under [Cloudwatch](https://console.aws.amazon.com/cloudwatch/). 
 
+Next we will deploy our frontend to S3 as a static site.
 
-We're going to deploy the Angular frontend to S3 as a static website.
+First we need to create an S3 bucket for this purpose and configure it for static website hosting ([see Steps 1-2 here](https://docs.aws.amazon.com/AmazonS3/latest/dev/HostingWebsiteOnS3Setup.html)). If you are using a custom domain, follow [these instructions](https://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html) to host a static S3 site using your own url (this is the route I went: [fit-converter.com](fit-converter.com).
 
-First we need to create an S3 bucket for this purpose and configure it for static website hosting ([see Steps 1-2 here](https://docs.aws.amazon.com/AmazonS3/latest/dev/HostingWebsiteOnS3Setup.html)). If you are using a custom domain, follow [these instructions](https://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html).
-
-We'll also want to update the production configuration of the app by setting the `apiRoot` in `environment.prod.ts` to the endpoint created by Chalice:
+We'll also want to update the production configuration of the app by setting the `apiRoot` in `environment.prod.ts` to the endpoint created by Chalice. This allows us to run the app locally with `chalice local` without the need to for making code changes to the URL when we're ready to deploy. The `environment.prod.ts` file should look like:
 ```
 export const environment = {
   production: true,
@@ -223,8 +224,30 @@ fit-convert-ng5 $ ng build --prod --aot
 
 This can then be copied to our S3 bucket with (you may need to do this from your virtualenv):
 ```
-$ aws s3 sync --acl public-read --delete ./dist/ s3://fit-convert
+$ aws s3 sync --acl public-read --delete ./dist/ s3://my-domain.com
 ```
+
+Lastly, we'll want to go back to our `app.py` and update the CORS settings so that only requests from our S3 URL / personal domain are accepted. We do this my creating a custom `CORSConfig` (replace `my-domain.com` with your custom URL or the URL of your public S3 bucket):
+```python
+from chalice import Chalice, CORSConfig
+
+...
+
+cors_config = CORSConfig(
+    allow_origin='http://my-domain.com',
+)
+
+...
+
+@app.route('/process', methods=['POST'], cors=cors_config, content_types=['multipart/form-data'])
+def index3():
+    ...
+    
+```
+
+And then redeploy with `chalice deploy`.
+
+
 
 
 
